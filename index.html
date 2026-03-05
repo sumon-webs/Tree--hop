@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Daisy ui and tailwind cdn-->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -64,18 +68,26 @@
     <main class=" bg-[#F0FDF4]">
         <section class=" max-w-screen-2xl mx-auto pt-18 ">
             <h1 class=" text-center text-black text-4xl font-semibold mb-12">Chose Your Trees</h1>
-            <div class=" grid grid-cols-12 text-center">
-                <div class=" col-span-2 space-y-4">
-                    <button class=" btn btn-soft w-full">All Tree</button>
-                </div>
-                <div class=" col-span-8"> 
-                    <h1> Hello</h1>
-                </div>
-                <div class=" col-span-2">
-                    <h1>Hello</h1>
-                </div>
+            <div id="loading-section" class=" flex justify-center hidden">
+                <span class="loading loading-dots loading-xl"></span>
             </div>
+            <div class=" grid grid-cols-12 text-center">
+                <div class=" text-start col-span-2 space-y-3 st">
+                    <h1 class=" font-semibold text-2xl">Categories</h1>
+                    <button onclick="treesLoading()">All</button>
+                    <div id="category-container" class=" flex flex-col items-start space-y-3">
+
+                    </div>
+                </div>
+                <div class=" col-span-8">
+                    <div id="trees-section" class=" grid grid-cols-3 gap-3">
+
+                    </div>
+                    <div class=" col-span-2">
+                    </div>
+                </div>
         </section>
+
     </main>
 
     <script src="./index.js"></script>
