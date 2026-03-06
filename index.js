@@ -1,6 +1,14 @@
 const categoryContainer = document.getElementById("category-container")
 const tressSection = document.getElementById("trees-section")
 const loadingSection = document.getElementById("loading-section")
+const treeModal = document.getElementById("tree_modal")
+const modalBox = document.getElementById("tree_modal")
+
+const plantName = document.getElementById("plant-name")
+const plantImage = document.getElementById("plant-image")
+const plantCategory = document.getElementById("plant-category")
+const plantDescription = document.getElementById("plant-description")
+const plantAmount = document.getElementById("plant-amount")
 
 // Loading function
 
@@ -39,11 +47,11 @@ async function selectCategory(id) {
         div.innerHTML = `
         <div class="card bg-base-100 shadow-sm p-2 space-y-2">
          <figure>
-             <img src="${plant.image}"
+             <img onclick ="openModal(${plant.id})"  src="${plant.image}"
                  alt="Shoes"  class=" h-48 w-full object-cover"/>
          </figure>
          <div class=" justify-start space-y-2">
-             <h2 class="card-title">${plant.name}</h2>
+             <h2  onclick ="openModal(${plant.id})"  class="card-title">${plant.name}</h2>
              <p class="text-start line-clamp-2">${plant.description}</p>
                  <div class=" flex justify-between">
                      <div class="badge badge-soft badge-success">${plant.category}</div>
@@ -61,7 +69,7 @@ async function selectCategory(id) {
 }
 
 async function treesLoading() {
-    tressSection.innerHTML =""
+    tressSection.innerHTML = ""
 
     loading(true)
     const res = await fetch("https://openapi.programming-hero.com/api/plants")
@@ -71,11 +79,11 @@ async function treesLoading() {
         div.innerHTML = `
         <div class="card bg-base-100 shadow-sm p-2 space-y-2">
          <figure>
-             <img src="${plant.image}"
-                 alt="Shoes"  class=" h-48 w-full object-cover"/>
+             <img  onclick ="openModal(${plant.id})" src="${plant.image}"
+                 alt="Shoes" title="${plant.name}"  class=" h-48 w-full object-cover"/>
          </figure>
          <div class=" justify-start space-y-2">
-             <h2 class="card-title">${plant.name}</h2>
+             <h2  onclick ="openModal(${plant.id})" class="card-title">${plant.name}</h2>
              <p class="text-start line-clamp-2">${plant.description}</p>
                  <div class=" flex justify-between">
                      <div class="badge badge-soft badge-success">${plant.category}</div>
@@ -91,6 +99,21 @@ async function treesLoading() {
         loading(false)
     })
 }
+
+async function openModal(id) {
+    const res = await fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
+    const data = await res.json()
+    const plant = data.plants;
+    
+    plantName.innerText = plant.name
+    plantImage.src = plant.image
+    plantCategory.innerText = plant.category
+    plantDescription.innerText = plant.description
+    plantAmount.innerText = plant.price
+
+    modalBox.showModal()
+}
+
 
 treesLoading()
 categoryLoading()
